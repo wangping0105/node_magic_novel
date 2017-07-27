@@ -23,6 +23,7 @@
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
     "html-webpack-plugin": "^2.29.0",
+    "http-proxy-middleware": "^0.17.4",
     "image-loader": "^0.0.1",
     "image-webpack-loader": "^3.3.1",
     "jquery": "^3.2.1",

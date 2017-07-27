@@ -3,26 +3,49 @@ import React, {Component} from 'react'
 import RightSide from './components/right_side'
 
 class BookList extends Component{
+    constructor(props) {
+      super(props);
+      this.state = { books: [] }
+      const _this = this;
+      $.ajax({
+          url: 'http://localhost:9000/api/v1/home',
+          dataType: 'json',
+          type: 'get',
+          success: (data)=>{
+            console.log(data.data.books)
+            _this.setState({
+              books: data.data.books
+            })
+          }
+      })
+    }
+
     componentDidMount(){
 
     }
 
+    componentDidUpdate(){
+    }
+
     render() {
+      console.log(this.state.books)
       return  (
-          <div id="tab_books" className="row bg-white">
-              <div className="col-md-4 h-280">
-              <h4><a href="/books/1">[武侠]测试书籍</a></h4>
-              <div className="h-180">
-              <span className="f-left">
-                <a href="/books/1"></a>
-              </span>
-              <span>
-                <a href="/books/1">测试的用的</a>
-              </span>
-              </div>
-              <p><a className="btn btn-default" href="/books/1" role="button">查看更多 »</a></p>
-            </div>
-          </div>
+          <ul id="tab_books" className="row bg-white table table-striped">
+          {
+              this.state.books.map(function (item) {
+                  return (
+                      <li  key={item.id}>
+                          <h4><a href="/books/{item.id}">{item.title}</a></h4>
+                          <div className="h-180">
+                          <span>
+                            <a href="/books/1">{item.introduction}</a>
+                          </span>
+                          </div>
+                      </li>
+                  )
+              })
+          }
+          </ul>
       );
     }
 }

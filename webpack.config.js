@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: 'eval-source-map',
-    entry: ['webpack/hot/dev-server', path.resolve(__dirname, './app/main.js')],
+    entry: [ path.resolve(__dirname, './app/main.js')],
     //入口文件并添加了热加载
     output: {
         path: path.resolve(__dirname, './build'),
@@ -61,13 +61,6 @@ module.exports = {
             options: {
                 postcss: function () {
                     return [precss, autoprefixer];
-                },
-                devServer: {
-                    contentBase: "./public", //本地服务器所加载的页面所在的目录
-                    colors: true, //终端中输出结果为彩色
-                    historyApiFallback: true, //不跳转
-                    inline: true, //实时刷新
-                    hot: true
                 }
             }
         })
@@ -75,5 +68,18 @@ module.exports = {
     resolve: {
         //自动扩展文件后缀名
         extensions: ['.js', '.json', '.scss', '.ts']
+    },
+    devServer: {
+        contentBase: "./", //本地服务器所加载的页面所在的目录
+        historyApiFallback: true, //不跳转
+        inline: true, //实时刷新
+        hot: true,
+        proxy: {
+            "/api/v1/*": {
+                 target: 'http://localhost:9000',
+                 changeOrigin: true,
+                 secure: false
+            }
+        }
     }
 };
