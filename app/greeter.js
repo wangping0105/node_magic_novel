@@ -19,8 +19,11 @@ import styles from './greeter.css';
 class Greeter extends Component{
     render() {
         return (
-            <div className ={styles.root}>
-                {config.greetText}
+            <div className="container">
+              <hr className="featurette-divider"/>
+              <footer>
+                <p>Shanghai China ©jackping 2014</p>
+              </footer>
             </div>
         );
     }
